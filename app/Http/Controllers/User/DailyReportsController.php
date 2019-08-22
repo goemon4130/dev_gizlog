@@ -41,7 +41,9 @@ class DailyReportsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $this->dailyReport->fill($input)->save();
+        return redirect()->to('dailyreports');
     }
 
     /**
