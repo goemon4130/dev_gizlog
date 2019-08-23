@@ -18,7 +18,7 @@ class DailyReportsSeeder extends Seeder
                 'user_id' => 1,
                 'title' => 'gizlog',
                 'content' => 'seederテスト',
-                'reporting_time' => Carbon::now()->format('m/d(D)'),
+                'reporting_time' => Carbon::now(),
                 'created_at' => Carbon::create(2018, 1, 1),
                 'updated_at' => Carbon::create(2018, 8, 18),
                 'deleted_at' => Carbon::create(2018, 8, 18)

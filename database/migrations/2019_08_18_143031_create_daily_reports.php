@@ -18,7 +18,7 @@ class CreateDailyReports extends Migration
             $table->integer('user_id')->nullable();
             $table->string('title');
             $table->string('content');
-            $table->string('reporting_time');
+            $table->date('reporting_time');
             $table->datetime('deleted_at')->nullable();
             $table->timestamps();
         });
