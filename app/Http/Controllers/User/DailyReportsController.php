@@ -92,6 +92,7 @@ class DailyReportsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->dailyReport->find($id)->delete();
+        return redirect()->to('dailyreports');
     }
 }
