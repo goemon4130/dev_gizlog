@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-    <a class="btn btn-edit" href=""><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    <a class="btn btn-edit" href="{{ route('dailyreports.edit', $dailyReport->id )}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     <div class="btn-delete">
       <form>
         <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i></button>
