@@ -5,7 +5,7 @@
 <div class="main-wrap">
   <div class="btn-wrapper daily-report">
     <!--<form>-->
-    {!! Form::open(['route' => ['dailyreports.show', $dailyReports[0]->reporting_time], 'method' => 'GET']) !!}
+    {!! Form::open(['route' => 'dailyreports.date.search', 'method' => 'GET']) !!}
       <input class="form-control" name="search-month" type="month">
       <button type="submit" class="btn btn-icon"><i class="fa fa-search"></i></button>
     {!! Form::close() !!}

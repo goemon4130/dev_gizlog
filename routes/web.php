@@ -46,8 +46,8 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
     Route::post('question/{id}/comment', ['as' => 'question.comment', 'uses' => 'QuestionController@storeComment']);
     Route::resource('question', QuestionController::class);
 
-    Route:: resource('dailyreports', 'DailyReportsController');
-
+    Route::resource('dailyreports', 'DailyReportsController');
+    Route::get('dailyreports/date/search', 'DailyReportsController@dateSearch')->name('dailyreports.date.search');
 });
 
 

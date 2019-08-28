@@ -95,4 +95,11 @@ class DailyReportsController extends Controller
         $this->dailyReport->find($id)->delete();
         return redirect()->to('dailyreports');
     }
+
+    public function dateSearch(Request $request)
+    {
+        $input = $request->query('search-month');
+        $dailyReports = $this->dailyReport->where('reporting_time', 'like', $input. '%')->get();
+        return view('user.daily_report.index', compact('dailyReports'));
+    }
 }
