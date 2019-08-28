@@ -41,6 +41,11 @@ class DailyReportsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'reporting_time' => 'required|date',
+            'title' => 'required|string',
+            'content' => 'required|string'
+        ]);
         $input = $request->all();
         $this->dailyReport->fill($input)->save();
         return redirect()->to('dailyreports');
@@ -79,6 +84,11 @@ class DailyReportsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'reporting_time' => 'required|date',
+            'title' => 'required|string',
+            'content' => 'required|string'
+        ]);
         $input = $request->all();
         $this->dailyReport->find($id)->fill($input)->save();
         return redirect()->to('dailyreports');
