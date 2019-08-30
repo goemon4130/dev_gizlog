@@ -8,6 +8,8 @@ use App\DailyReport;
 
 class DailyReportsController extends Controller
 {
+    private $dailyReport;
+    
     public function __construct(DailyReport $dailyReport)
     {
         $this->dailyReport = $dailyReport;
