@@ -5,11 +5,12 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DailyReport;
+use App\Http\Requests\User\DailyReportRequest;
 
 class DailyReportsController extends Controller
 {
     private $dailyReport;
-    
+
     public function __construct(DailyReport $dailyReport)
     {
         $this->dailyReport = $dailyReport;
@@ -41,13 +42,8 @@ class DailyReportsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DailyReportRequest $request)
     {
-        $request->validate([
-            'reporting_time' => 'required|date',
-            'title' => 'required|string',
-            'content' => 'required|string'
-        ]);
         $input = $request->all();
         $this->dailyReport->fill($input)->save();
         return redirect()->to('dailyreports');
@@ -84,13 +80,8 @@ class DailyReportsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DailyReportRequest $request, $id)
     {
-        $request->validate([
-            'reporting_time' => 'required|date',
-            'title' => 'required|string',
-            'content' => 'required|string'
-        ]);
         $input = $request->all();
         $this->dailyReport->find($id)->fill($input)->save();
         return redirect()->to('dailyreports');
