@@ -8,9 +8,9 @@ use App\DailyReport;
 
 class DailyReportsController extends Controller
 {
-    public function __construct(DailyReport $instanceclass)
+    public function __construct(DailyReport $dailyReport)
     {
-        $this->dailyReport = $instanceclass;
+        $this->dailyReport = $dailyReport;
     }
     /**
      * Display a listing of the resource.
