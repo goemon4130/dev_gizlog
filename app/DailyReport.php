@@ -11,10 +11,10 @@ class DailyReport extends Model
 
     protected $dates = ['reporting_time'];
 
-    public function dateSearch($input)
+    public function dateSearch($inputMonth)
     {
         return $this->where('user_id', Auth::id())
-                    ->where('reporting_time', 'like', $input. '%')
+                    ->where('reporting_time', 'like', $inputMonth. '%')
                     ->get();
     }
 

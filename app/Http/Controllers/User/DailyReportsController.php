@@ -24,10 +24,10 @@ class DailyReportsController extends Controller
      */
     public function index(Request $request)
     {
-        $input = $request->query('search-month');
-        if (isset($input))
+        $inputMonth = $request->query('search-month');
+        if (isset($inputMonth))
         {
-            $dailyReports = $this->dailyReport->dateSearch($input);
+            $dailyReports = $this->dailyReport->dateSearch($inputMonth);
             return view('user.daily_report.index', compact('dailyReports'));
         } else {
             $dailyReports = $this->dailyReport->getAll();
@@ -53,8 +53,8 @@ class DailyReportsController extends Controller
      */
     public function store(DailyReportRequest $request)
     {
-        $input = $request->all();
-        $input['user_id'] = Auth::id();
+        $inputDailyReport = $request->all();
+        $inputDailyReport['user_id'] = Auth::id();
         $this->dailyReport->fill($input)->save();
         return redirect()->to('dailyreports');
     }
@@ -92,8 +92,8 @@ class DailyReportsController extends Controller
      */
     public function update(DailyReportRequest $request, $id)
     {
-        $input = $request->all();
-        $this->dailyReport->find($id)->fill($input)->save();
+        $inputDailyReport = $request->all();
+        $this->dailyReport->find($id)->fill($inputDailyReport)->save();
         return redirect()->to('dailyreports');
     }
 
