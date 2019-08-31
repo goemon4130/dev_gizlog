@@ -47,7 +47,6 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
     Route::resource('question', QuestionController::class);
 
     Route::resource('dailyreports', 'DailyReportsController');
-    Route::get('dailyreports/date/search', 'DailyReportsController@dateSearch')->name('dailyreports.date.search');
 });
 
 

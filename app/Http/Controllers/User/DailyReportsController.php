@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DailyReport;
 use App\Http\Requests\User\DailyReportRequest;
+use Auth;
 
 class DailyReportsController extends Controller
 {
@@ -13,6 +14,7 @@ class DailyReportsController extends Controller
 
     public function __construct(DailyReport $dailyReport)
     {
+        $this->middleware('auth');
         $this->dailyReport = $dailyReport;
     }
     /**
@@ -20,10 +22,17 @@ class DailyReportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $dailyReports = $this->dailyReport->get();
-        return view('user.daily_report.index', compact('dailyReports'));
+        $input = $request->query('search-month');
+        if (isset($input))
+        {
+            $dailyReports = $this->dailyReport->dateSearch($input);
+            return view('user.daily_report.index', compact('dailyReports'));
+        } else {
+            $dailyReports = $this->dailyReport->getAll();
+            return view('user.daily_report.index', compact('dailyReports'));
+        }
     }
 
     /**
@@ -45,6 +54,7 @@ class DailyReportsController extends Controller
     public function store(DailyReportRequest $request)
     {
         $input = $request->all();
+        $input['user_id'] = Auth::id();
         $this->dailyReport->fill($input)->save();
         return redirect()->to('dailyreports');
     }
@@ -97,12 +107,5 @@ class DailyReportsController extends Controller
     {
         $this->dailyReport->find($id)->delete();
         return redirect()->to('dailyreports');
-    }
-
-    public function dateSearch(Request $request)
-    {
-        $input = $request->query('search-month');
-        $dailyReports = $this->dailyReport->where('reporting_time', 'like', $input. '%')->get();
-        return view('user.daily_report.index', compact('dailyReports'));
     }
 }

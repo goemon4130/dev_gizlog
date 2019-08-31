@@ -15,12 +15,12 @@ class CreateDailyReports extends Migration
     {
         Schema::create('daily_reports', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->nullable();
+            $table->integer('user_id');
             $table->string('title');
             $table->text('content');
             $table->date('reporting_time');
-            $table->datetime('deleted_at')->nullable();
             $table->timestamps();
+            $table->datetime('deleted_at')->nullable();
         });
     }
 
