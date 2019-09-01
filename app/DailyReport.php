@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DailyReport extends Model
 {
-    protected $fillable = ['title', 'content', 'reporting_time', 'user_id', 'deleted_at'];
+    use softDeletes;
+
+    protected $fillable = ['title', 'content', 'reporting_time', 'user_id'];
 
     protected $dates = ['reporting_time'];
 
