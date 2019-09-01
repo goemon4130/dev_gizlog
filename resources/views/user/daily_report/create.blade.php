@@ -5,25 +5,24 @@
 <div class="main-wrap">
   <div class="container">
     {!! Form::open(['route' => 'dailyreports.store']) !!}
-      <input class="form-control" name="user_id" type="hidden">
-      <div class="form-group form-size-small">
-        <input class="form-control{{ $errors->has('reporting_time') ? ' is-invalid' : '' }}" name="reporting_time" type="date">
+      <div class="form-group form-size-small{{ $errors->has('reporting_time') ? ' is-invalid' : '' }}">
+        {!! Form::input('date', 'reporting_time', null, ['class' => 'form-control']) !!}
         @if ($errors->has('reporting_time'))
           <span class="help-block">
             {{ $errors->first('reporting_time') }}
           </span>
         @endif
       </div>
-      <div class="form-group">
-        <input class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="Title" name="title" type="text">
+      <div class="form-group{{ $errors->has('title') ? ' is-invalid' : '' }}">
+        {!! Form::input('text', 'title', null, ['class' => 'form-control', 'placeholder' => 'Title']) !!}
         @if ($errors->has('title'))
           <span class="help-block">
             {{ $errors->first('title') }}
           </span>
         @endif
       </div>
-      <div class="form-group">
-        <textarea class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" placeholder="Content" name="content" cols="50" rows="10"></textarea>
+      <div class="form-group{{ $errors->has('content') ? ' is-invalid' : '' }}">
+        {!! Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => 'Content']) !!}
         @if ($errors->has('content'))
           <span class="help-block">
             {{ $errors->first('content') }}

@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-.is-invalid {
+.is-invalid .form-control{
     border-color: #ff0000;
 }
 
-.is-invalid + .help-block {
+.form-control + .help-block {
     color: #ff0000;
 }
