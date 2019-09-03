@@ -21,7 +21,6 @@ class DailyReportsSeeder extends Seeder
                 'reporting_time' => Carbon::now(),
                 'created_at' => Carbon::create(2018, 1, 1),
                 'updated_at' => Carbon::create(2018, 8, 18),
-                'deleted_at' => null,
             ],
             [
                 'user_id' => 4,
@@ -30,7 +29,6 @@ class DailyReportsSeeder extends Seeder
                 'reporting_time' => Carbon::now(),
                 'created_at' => Carbon::create(2019, 1, 1),
                 'updated_at' => Carbon::create(2019, 8, 18),
-                'deleted_at' => null,
             ],
         ]);
     }

@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-    <a class="btn btn-edit" href="{{ route('dailyreports.edit', $dailyReport->id )}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    <a class="btn btn-edit" href="{{ route('dailyreports.edit', $dailyReport->id ) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     <div class="btn-delete">
       {!! Form::open(['route' => ['dailyreports.destroy', $dailyReport->id], 'method' => 'DELETE']) !!}
         {!! Form::button('<i class="fa fa-trash-o"></i>', ['class' => 'btn btn-danger']) !!}

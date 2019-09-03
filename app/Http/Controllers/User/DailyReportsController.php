@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DailyReport;
+use App\Models\DailyReport;
 use App\Http\Requests\User\DailyReportRequest;
 use Auth;
 
@@ -17,6 +17,7 @@ class DailyReportsController extends Controller
         $this->middleware('auth');
         $this->dailyReport = $dailyReport;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,14 +26,12 @@ class DailyReportsController extends Controller
     public function index(Request $request)
     {
         $inputMonth = $request->query('search-month');
-        if (isset($inputMonth))
-        {
-            $dailyReports = $this->dailyReport->dateSearch($inputMonth);
-            return view('user.daily_report.index', compact('dailyReports'));
+        if (isset($inputMonth)) {
+            $dailyReports = $this->dailyReport->getMonthlyDailyReport($inputMonth, Auth::id());
         } else {
-            $dailyReports = $this->dailyReport->getAll();
-            return view('user.daily_report.index', compact('dailyReports'));
+            $dailyReports = $this->dailyReport->getAllDailyReport(Auth::id());
         }
+        return view('user.daily_report.index', compact('dailyReports'));
     }
 
     /**
@@ -56,7 +55,7 @@ class DailyReportsController extends Controller
         $inputDailyReport = $request->all();
         $inputDailyReport['user_id'] = Auth::id();
         $this->dailyReport->fill($inputDailyReport)->save();
-        return redirect()->to('dailyreports');
+        return redirect()->route('dailyreports.index');
     }
 
     /**
@@ -94,7 +93,7 @@ class DailyReportsController extends Controller
     {
         $inputDailyReport = $request->all();
         $this->dailyReport->find($id)->fill($inputDailyReport)->save();
-        return redirect()->to('dailyreports');
+        return redirect()->to('dailyreports.index');
     }
 
     /**
@@ -106,6 +105,6 @@ class DailyReportsController extends Controller
     public function destroy($id)
     {
         $this->dailyReport->find($id)->delete();
-        return redirect()->to('dailyreports');
+        return redirect()->to('dailyreports.index');
     }
 }

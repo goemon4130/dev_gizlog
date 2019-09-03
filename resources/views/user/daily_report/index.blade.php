@@ -8,7 +8,7 @@
       {!! Form::input('month', 'search-month', null, ['class' => 'form-control']) !!}
       {!! Form::button('<i class="fa fa-search"></i>', ['class' => 'btn btn-icon', 'type' => 'submit']) !!}
     {!! Form::close() !!}
-    <a class="btn btn-icon" href="{{ route('dailyreports.create')}}"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-icon" href="{{ route('dailyreports.create') }}"><i class="fa fa-plus"></i></a>
   </div>
   <div class="content-wrapper table-responsive">
     <table class="table table-striped">
