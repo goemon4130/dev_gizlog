@@ -93,7 +93,7 @@ class DailyReportsController extends Controller
     {
         $inputDailyReport = $request->all();
         $this->dailyReport->find($id)->fill($inputDailyReport)->save();
-        return redirect()->to('dailyreports.index');
+        return redirect()->route('dailyreports.index');
     }
 
     /**
@@ -105,6 +105,6 @@ class DailyReportsController extends Controller
     public function destroy($id)
     {
         $this->dailyReport->find($id)->delete();
-        return redirect()->to('dailyreports.index');
+        return redirect()->route('dailyreports.index');
     }
 }

@@ -14,7 +14,7 @@
         @endif
       </div>
       <div class="form-group{{ $errors->has('title') ? ' is-invalid' : '' }}">
-        {!! Form::input('text', 'title', null, ['class' => 'form-control', 'placeholder' => 'Title']) !!}
+        {!! Form::input('text', 'title', $dailyReport->title, ['class' => 'form-control', 'placeholder' => 'Title']) !!}
         @if ($errors->has('title'))
           <span class="help-block">
             {{ $errors->first('title') }}
