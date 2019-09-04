@@ -23,20 +23,12 @@ class DailyReportRequest extends FormRequest
      */
     public function rules()
     {
-        $inputMonth = $this->all();
-        if (empty($inputMonth) or (array_key_exists('search-month', $inputMonth) and $inputMonth['search-month'] === null)) {
-            return [];
-        } elseif (array_key_exists('reporting_time', $inputMonth) or array_key_exists('title', $inputMonth) or array_key_exists('content', $inputMonth)) {
-            return [
-                'reporting_time' => ['required', 'date'],
-                'title' => ['required', 'max:255'],
-                'content' => ['required', 'max:2000'],
-            ];
-        } else {
-            return [
-                'search-month' => ['date'],
-            ];
-        }
+        return [
+            'reporting_time' => ['sometimes', 'required', 'date'],
+            'title' => ['sometimes', 'required', 'max:255'],
+            'content' => ['sometimes', 'required', 'max:2000'],
+            'search-month' => ['sometimes', 'date'],
+        ];
     }
 
     public function messages()

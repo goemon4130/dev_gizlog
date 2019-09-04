@@ -23,6 +23,6 @@ class DailyReport extends Model
 
     public function getAllDailyReport($userId)
     {
-        return $this->where('user_id', $userId)->get();
+        return $this->where('user_id', $userId)->latest('reporting_time')->get();
     }
 }
