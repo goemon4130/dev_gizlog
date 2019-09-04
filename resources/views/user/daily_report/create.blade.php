@@ -5,7 +5,7 @@
 <div class="main-wrap">
   <div class="container">
     {!! Form::open(['route' => 'dailyreports.store']) !!}
-      <div class="form-group form-size-small{{ $errors->has('reporting_time') ? ' is-invalid' : '' }}">
+      <div class="form-group form-size-small{{ $errors->has('reporting_time') ? ' has-error' : '' }}">
         {!! Form::input('date', 'reporting_time', null, ['class' => 'form-control']) !!}
         @if ($errors->has('reporting_time'))
           <span class="help-block">
@@ -13,7 +13,7 @@
           </span>
         @endif
       </div>
-      <div class="form-group{{ $errors->has('title') ? ' is-invalid' : '' }}">
+      <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
         {!! Form::input('text', 'title', null, ['class' => 'form-control', 'placeholder' => 'Title']) !!}
         @if ($errors->has('title'))
           <span class="help-block">
@@ -21,7 +21,7 @@
           </span>
         @endif
       </div>
-      <div class="form-group{{ $errors->has('content') ? ' is-invalid' : '' }}">
+      <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
         {!! Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => 'Content']) !!}
         @if ($errors->has('content'))
           <span class="help-block">
@@ -29,7 +29,7 @@
           </span>
         @endif
       </div>
-      <button type="submit" class="btn btn-success pull-right">Add</button>
+      {!! Form::button('Add', ['class' => 'btn btn-success pull-right', 'type' => 'submit']) !!}
     {!! Form::close() !!}
   </div>
 </div>

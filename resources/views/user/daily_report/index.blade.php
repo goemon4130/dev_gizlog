@@ -3,12 +3,17 @@
 
 <h2 class="brand-header">日報一覧</h2>
 <div class="main-wrap">
-  <div class="btn-wrapper daily-report">
+  <div class="btn-wrapper daily-report{{ $errors->has('search-month') ? ' has-error' : '' }}">
     {!! Form::open(['route' => 'dailyreports.index', 'method' => 'GET']) !!}
       {!! Form::input('month', 'search-month', null, ['class' => 'form-control']) !!}
       {!! Form::button('<i class="fa fa-search"></i>', ['class' => 'btn btn-icon', 'type' => 'submit']) !!}
     {!! Form::close() !!}
     <a class="btn btn-icon" href="{{ route('dailyreports.create') }}"><i class="fa fa-plus"></i></a>
+    @if ($errors->has('search-month'))
+      <span class="help-block">
+        {{ $errors->first('search-month') }}
+      </span>
+    @endif
   </div>
   <div class="content-wrapper table-responsive">
     <table class="table table-striped">

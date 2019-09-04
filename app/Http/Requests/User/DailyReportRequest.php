@@ -23,11 +23,20 @@ class DailyReportRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'reporting_time' => ['required', 'date'],
-            'title' => ['required', 'max:255'],
-            'content' => ['required', 'max:2000'],
-        ];
+        $inputMonth = $this->all();
+        if (empty($inputMonth) or (array_key_exists('search-month', $inputMonth) and $inputMonth['search-month'] === null)) {
+            return [];
+        } elseif (array_key_exists('reporting_time', $inputMonth) or array_key_exists('title', $inputMonth) or array_key_exists('content', $inputMonth)) {
+            return [
+                'reporting_time' => ['required', 'date'],
+                'title' => ['required', 'max:255'],
+                'content' => ['required', 'max:2000'],
+            ];
+        } else {
+            return [
+                'search-month' => ['date'],
+            ];
+        }
     }
 
     public function messages()
@@ -38,7 +47,8 @@ class DailyReportRequest extends FormRequest
             'title.required' => '入力必須の項目です。',
             'title.max' => '255文字以下で入力してください。',
             'content.required' => '入力必須の項目です。',
-            'content.max' => '2000文字以下で入力してください。'
+            'content.max' => '2000文字以下で入力してください。',
+            'search-month.date' => '日付で検索してください。'
         ];
     }
 }

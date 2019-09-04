@@ -23,7 +23,7 @@ class DailyReportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(DailyReportRequest $request)
     {
         $inputMonth = $request->query('search-month');
         if (isset($inputMonth)) {
