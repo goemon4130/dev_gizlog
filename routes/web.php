@@ -42,6 +42,8 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
 
     Route::resource('report', DailyReportController::class);
 
+    Route::resource('question', QuestionController::class);
+
 });
 
 
@@ -89,4 +91,3 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
     Route::get('/register/', 'Auth\AdminRegisterController@showAdminRegistrationForm');
 
 });
-
