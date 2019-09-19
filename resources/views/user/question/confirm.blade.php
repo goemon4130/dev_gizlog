@@ -31,7 +31,6 @@
       <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
   </form>-->
     {!! Form::open(['route' => 'question.store']) !!}
-      {!! Form::input('hidden', 'user_id', $allRequest['user_id']) !!}
       {!! Form::input('hidden', 'tag_category_id', $allRequest['tag_category_id']) !!}
       {!! Form::input('hidden', 'title', $allRequest['title']) !!}
       {!! Form::input('hidden', 'content', $allRequest['content']) !!}

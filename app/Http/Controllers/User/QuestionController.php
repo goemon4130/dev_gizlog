@@ -59,6 +59,7 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $allRequest = $request->all();
+        $allRequest['user_id'] = Auth::id();
         $this->question->fill($allRequest)->save();
         return redirect()->route('question.index');
     }
@@ -111,7 +112,6 @@ class QuestionController extends Controller
     public function confirm(Request $request)
     {
         $allRequest = $request->all();
-        $allRequest['user_id'] = Auth::id();
         $requestTagCategory = $this->tagCategory->find($allRequest['tag_category_id']);
         return view('user.question.confirm', compact('allRequest', 'requestTagCategory'));
     }
