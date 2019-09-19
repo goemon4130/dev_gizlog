@@ -46,7 +46,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        $tagCategorys = $this->tagCategory->all();
+        return view('user.question.create', compact('tagCategorys'));
     }
 
     /**
@@ -57,7 +58,9 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $allRequest = $request->all();
+        $this->question->fill($allRequest)->save();
+        return redirect()->route('question.index');
     }
 
     /**
@@ -103,5 +106,13 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function confirm(Request $request)
+    {
+        $allRequest = $request->all();
+        $allRequest['user_id'] = Auth::id();
+        $requestTagCategory = $this->tagCategory->find($allRequest['tag_category_id']);
+        return view('user.question.confirm', compact('allRequest', 'requestTagCategory'));
     }
 }
