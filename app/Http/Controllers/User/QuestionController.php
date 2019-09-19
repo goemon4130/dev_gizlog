@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Models\TagCategory;
+use App\Models\Comment;
 use Auth;
 
 class QuestionController extends Controller
@@ -14,11 +15,14 @@ class QuestionController extends Controller
 
     protected $user;
 
-    public function __construct(Question $question, TagCategory $tagCategory)
+    protected $comment;
+
+    public function __construct(Question $question, TagCategory $tagCategory, Comment $comment)
     {
         $this->middleware('auth');
         $this->question = $question;
         $this->tagCategory = $tagCategory;
+        $this->comment = $comment;
     }
     /**
      * Display a listing of the resource.
@@ -72,7 +76,9 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $showQuestion = $this->question->find($id);
+        $questionComments = $this->comment->where('question_id', $id)->get();
+        return view('user.question.show', compact('showQuestion', 'questionComments'));
     }
 
     /**
