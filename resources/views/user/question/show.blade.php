@@ -25,17 +25,19 @@
     </div>
   </div>
     <div class="comment-list">
+      @foreach ($questionComments as $questionComment)
         <div class="comment-wrap">
           <div class="comment-title">
-            <img src="" class="avatar-img">
-            <p></p>
-            <p class="comment-date"></p>
+            <img src="{{ $questionComment->user->avatar }}" class="avatar-img">
+            <p>{{ $questionComment->user->name }}</p>
+            <p class="comment-date">{{ $questionComment->created_at->format('Y-m-d H-i') }}</p>
           </div>
-          <div class="comment-body"></div>
+          <div class="comment-body">{{ $questionComment->comment }}</div>
         </div>
+      @endforeach
     </div>
   <div class="comment-box">
-    <form>
+    <!--<form>
       <input name="user_id" type="hidden" value="">
       <input name="question_id" type="hidden" value="">
       <div class="comment-title">
@@ -50,7 +52,20 @@
           <i class="fa fa-pencil" aria-hidden="true"></i>
         </button>
       </div>
-    </form>
+  </form>-->
+    {!! Form::open(['route' => 'question.comment']) !!}
+      {!! Form::input('hidden', 'question_id', $showQuestion->id) !!}
+      <div class="comment-title">
+        <img src="" class="avatar-img"><p>コメントを投稿する</p>
+      </div>
+      <div class="comment-body">
+        {!! Form::textarea('comment', null, ['class' => 'form-control', 'placeholder' => 'Add your comment...']) !!}
+        <span class="help-block"></span>
+      </div>
+      <div class="comment-bottom">
+        {!! Form::button('<i class="fa fa-pencil" aria-hidden="true"></i>', ['class' => 'btn btn-success', 'type' => 'submit']) !!}
+      </div>
+    {!! Form::close() !!}
   </div>
 </div>
 @endsection

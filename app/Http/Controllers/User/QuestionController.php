@@ -121,4 +121,12 @@ class QuestionController extends Controller
         $requestTagCategory = $this->tagCategory->find($allRequest['tag_category_id']);
         return view('user.question.confirm', compact('allRequest', 'requestTagCategory'));
     }
+
+    public function comment(Request $request)
+    {
+        $allRequest = $request->all();
+        $allRequest['user_id'] = Auth::id();
+        $this->comment->fill($allRequest)->save();
+        return redirect()->route('question.show', $allRequest['question_id']);
+    }
 }

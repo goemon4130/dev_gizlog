@@ -10,6 +10,6 @@ class Comment extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Modes\User');
+        return $this->belongsTo('App\Models\User');
     }
 }
