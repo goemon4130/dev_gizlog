@@ -2,7 +2,7 @@
 @section ('content')
 
 <h2 class="brand-header">
-  <img src="" class="avatar-img">&nbsp;&nbsp;My page
+  <img src="{{ $myAccount->avatar }}" class="avatar-img">&nbsp;&nbsp;My page
 </h2>
 <div class="main-wrap">
   <div class="content-wrapper table-responsive">
@@ -18,28 +18,29 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="row">
-          <td class="col-xs-2"></td>
-          <td class="col-xs-1"></td>
-          <td class="col-xs-5"></td>
-          <td class="col-xs-2"><span class="point-color"></span></td>
-          <td class="col-xs-1">
-            <a class="btn btn-success" href="">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </a>
-          </td>
-          <td class="col-xs-1">
-            <form>
-              <button class="btn btn-danger" type="submit">
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
+        @foreach ($myPostedQuestions as $myPostedQuestion)
+          <tr class="row">
+            <td class="col-xs-2">{{ $myPostedQuestion->created_at }}</td>
+            <td class="col-xs-1">{{ $myPostedQuestion->tagCategory->name }}</td>
+            <td class="col-xs-5">{{ $myPostedQuestion->title }}</td>
+            <td class="col-xs-2"><span class="point-color">{{ $myPostedQuestion->comments->count() }}</span></td>
+            <td class="col-xs-1">
+              <a class="btn btn-success" href="{{ route('question.edit', $myPostedQuestion->id) }}">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
+            </td>
+            <td class="col-xs-1">
+              <form>
+                <button class="btn btn-danger" type="submit">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+        @endforeach
       </tbody>
     </table>
   </div>
 </div>
 
 @endsection
-

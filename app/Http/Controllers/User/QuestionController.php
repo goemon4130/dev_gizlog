@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Models\TagCategory;
 use App\Models\Comment;
+use App\Models\User;
 use Auth;
 
 class QuestionController extends Controller
@@ -17,12 +18,13 @@ class QuestionController extends Controller
 
     protected $comment;
 
-    public function __construct(Question $question, TagCategory $tagCategory, Comment $comment)
+    public function __construct(Question $question, TagCategory $tagCategory, Comment $comment, User $user)
     {
         $this->middleware('auth');
         $this->question = $question;
         $this->tagCategory = $tagCategory;
         $this->comment = $comment;
+        $this->user = $user;
     }
     /**
      * Display a listing of the resource.
@@ -89,7 +91,8 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $editQuestion = $this->question->find($id);
+        return view('user.question.edit', compact('editQuestion'));
     }
 
     /**
@@ -128,5 +131,12 @@ class QuestionController extends Controller
         $allRequest['user_id'] = Auth::id();
         $this->comment->fill($allRequest)->save();
         return redirect()->route('question.show', $allRequest['question_id']);
+    }
+
+    public function myPage()
+    {
+        $myPostedQuestions = $this->question->where('user_id', Auth::id())->get();
+        $myAccount = $this->user->find(Auth::id());
+        return view('user.question.mypage', compact('myPostedQuestions', 'myAccount'));
     }
 }

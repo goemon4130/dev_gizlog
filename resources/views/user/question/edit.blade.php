@@ -5,10 +5,11 @@
 
 <div class="main-wrap">
   <div class="container">
-    <form>
+    <!--<form>-->
+    {!! Form::open(['route' => ['question.update', $editQuestion->id], 'method' => 'PUT']) !!}
       <div class="form-group">
         <select name='tag_category_id' class = "form-control selectpicker form-size-small" id ="pref_id">
-          <option value=""></option>
+          <option value="{{ $editQuestion->tagCategory->id }}">{{ $editQuestion->tagCategory->name }}</option>
             <option value= ""></option>
         </select>
         <span class="help-block"></span>
@@ -22,9 +23,9 @@
         <span class="help-block"></span>
       </div>
       <input name="confirm" class="btn btn-success pull-right" type="submit" value="update">
-    </form>
+    <!--</form>-->
+    {!! Form::close() !!}
   </div>
 </div>
 
 @endsection
-
