@@ -30,12 +30,16 @@
       <input name="content" type="hidden" value="">
       <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
   </form>-->
-    {!! Form::open(['route' => 'question.store']) !!}
-      {!! Form::input('hidden', 'tag_category_id', $allRequest['tag_category_id']) !!}
-      {!! Form::input('hidden', 'title', $allRequest['title']) !!}
-      {!! Form::input('hidden', 'content', $allRequest['content']) !!}
-      {!! Form::button('<i class="fa fa-check" aria-hidden="true"></i>', ['class' => 'btn btn-success', 'type' => 'submit']) !!}
-    {!! Form::close() !!}
+    @if (parse_url(url()->previous())['path'] === '/question/create')
+      {!! Form::open(['route' => 'question.store']) !!}
+    @else
+      {!! Form::open(['route' => ['question.update', $allRequest['id']], 'method' => 'PUT']) !!}
+    @endif
+    {!! Form::input('hidden', 'tag_category_id', $allRequest['tag_category_id']) !!}
+    {!! Form::input('hidden', 'title', $allRequest['title']) !!}
+    {!! Form::input('hidden', 'content', $allRequest['content']) !!}
+    {!! Form::button('<i class="fa fa-check" aria-hidden="true"></i>', ['class' => 'btn btn-success', 'type' => 'submit']) !!}
+  {!! Form::close() !!}
   </div>
 </div>
 

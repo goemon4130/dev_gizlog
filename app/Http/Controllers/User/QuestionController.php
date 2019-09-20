@@ -92,7 +92,8 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $editQuestion = $this->question->find($id);
-        return view('user.question.edit', compact('editQuestion'));
+        $tagCategorys = $this->tagCategory->all();
+        return view('user.question.edit', compact('editQuestion', 'tagCategorys'));
     }
 
     /**
@@ -104,7 +105,9 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $allRequest = $request->all();
+        $this->question->find($id)->fill($allRequest)->save();
+        return redirect()->route('question.index');
     }
 
     /**
