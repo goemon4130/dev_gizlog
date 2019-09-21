@@ -118,7 +118,9 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->question->find($id)->delete();
+        $this->comment->where('question_id', $id)->delete();
+        return redirect()->route('question.mypage');
     }
 
     public function confirm(Request $request)
