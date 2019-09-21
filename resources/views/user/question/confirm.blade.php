@@ -12,11 +12,11 @@
         <tbody>
           <tr>
             <th class="table-column">Title</th>
-            <td class="td-text">{{ $allRequest['title'] }}</td>
+            <td class="td-text">{{ $inputRequest['title'] }}</td>
           </tr>
           <tr>
             <th class="table-column">Question</th>
-            <td class='td-text'>{{ $allRequest['content'] }}</td>
+            <td class='td-text'>{{ $inputRequest['content'] }}</td>
           </tr>
         </tbody>
       </table>
@@ -33,11 +33,11 @@
     @if (parse_url(url()->previous())['path'] === '/question/create')
       {!! Form::open(['route' => 'question.store']) !!}
     @else
-      {!! Form::open(['route' => ['question.update', $allRequest['id']], 'method' => 'PUT']) !!}
+      {!! Form::open(['route' => ['question.update', $inputRequest['id']], 'method' => 'PUT']) !!}
     @endif
-    {!! Form::input('hidden', 'tag_category_id', $allRequest['tag_category_id']) !!}
-    {!! Form::input('hidden', 'title', $allRequest['title']) !!}
-    {!! Form::input('hidden', 'content', $allRequest['content']) !!}
+    {!! Form::input('hidden', 'tag_category_id', $inputRequest['tag_category_id']) !!}
+    {!! Form::input('hidden', 'title', $inputRequest['title']) !!}
+    {!! Form::input('hidden', 'content', $inputRequest['content']) !!}
     {!! Form::button('<i class="fa fa-check" aria-hidden="true"></i>', ['class' => 'btn btn-success', 'type' => 'submit']) !!}
   {!! Form::close() !!}
   </div>

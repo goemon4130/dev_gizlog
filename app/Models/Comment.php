@@ -15,4 +15,9 @@ class Comment extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function getQuestionComments($id)
+    {
+        return $this->where('question_id', $id)->get();
+    }
 }

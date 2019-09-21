@@ -14,9 +14,11 @@ class QuestionController extends Controller
 {
     protected $question;
 
-    protected $user;
+    protected $tagCategory;
 
     protected $comment;
+
+    protected $user;
 
     public function __construct(Question $question, TagCategory $tagCategory, Comment $comment, User $user)
     {
@@ -33,13 +35,13 @@ class QuestionController extends Controller
      */
     public function index(Request $request)
     {
-        $allRequest = $request->all();
-        if ($allRequest === [] or $allRequest['tag_category_id'] === '0'){
+        $inputRequest = $request->all();
+        if ($inputRequest === [] or $inputRequest['tag_category_id'] === '0') {
             $questions = $this->question->getAllQuestion(Auth::id());
-        } elseif (isset($allRequest['search_word'])){
-            $questions = $this->question->getQuestionByMonth($allRequest['search_word']);
+        } elseif (isset($inputRequest['search_word'])) {
+            $questions = $this->question->getQuestionByMonth($inputRequest['search_word']);
         } else {
-            $questions = $this->question->getQuestionByCategory($allRequest['tag_category_id']);
+            $questions = $this->question->getQuestionByCategory($inputRequest['tag_category_id']);
         }
         $tagCategorys = $this->tagCategory->all();
         return view('user.question.index', compact('questions', 'tagCategorys'));
@@ -64,9 +66,9 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $allRequest = $request->all();
-        $allRequest['user_id'] = Auth::id();
-        $this->question->fill($allRequest)->save();
+        $inputRequest = $request->all();
+        $inputRequest['user_id'] = Auth::id();
+        $this->question->fill($inputRequest)->save();
         return redirect()->route('question.index');
     }
 
@@ -79,7 +81,7 @@ class QuestionController extends Controller
     public function show($id)
     {
         $showQuestion = $this->question->find($id);
-        $questionComments = $this->comment->where('question_id', $id)->get();
+        $questionComments = $this->comment->getQuestionComments($id);
         return view('user.question.show', compact('showQuestion', 'questionComments'));
     }
 
@@ -105,8 +107,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $allRequest = $request->all();
-        $this->question->find($id)->fill($allRequest)->save();
+        $inputRequest = $request->all();
+        $this->question->find($id)->fill($inputRequest)->save();
         return redirect()->route('question.index');
     }
 
@@ -125,22 +127,22 @@ class QuestionController extends Controller
 
     public function confirm(Request $request)
     {
-        $allRequest = $request->all();
-        $requestTagCategory = $this->tagCategory->find($allRequest['tag_category_id']);
-        return view('user.question.confirm', compact('allRequest', 'requestTagCategory'));
+        $inputRequest = $request->all();
+        $requestTagCategory = $this->tagCategory->find($inputRequest['tag_category_id']);
+        return view('user.question.confirm', compact('inputRequest', 'requestTagCategory'));
     }
 
     public function comment(Request $request)
     {
-        $allRequest = $request->all();
-        $allRequest['user_id'] = Auth::id();
-        $this->comment->fill($allRequest)->save();
-        return redirect()->route('question.show', $allRequest['question_id']);
+        $inputRequest = $request->all();
+        $inputRequest['user_id'] = Auth::id();
+        $this->comment->fill($inputRequest)->save();
+        return redirect()->route('question.show', $inputRequest['question_id']);
     }
 
     public function myPage()
     {
-        $myPostedQuestions = $this->question->where('user_id', Auth::id())->get();
+        $myPostedQuestions = $this->question->getMyPostedQuestions(Auth::id());
         $myAccount = $this->user->find(Auth::id());
         return view('user.question.mypage', compact('myPostedQuestions', 'myAccount'));
     }

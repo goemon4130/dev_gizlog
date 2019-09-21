@@ -40,4 +40,9 @@ class Question extends Model
     {
         return $this->where('tag_category_id', $tagCategoryId)->get();
     }
+
+    public function getMyPostedQuestions($id)
+    {
+        return $this->where('user_id', $id)->get();
+    }
 }
