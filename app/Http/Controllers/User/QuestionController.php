@@ -28,6 +28,7 @@ class QuestionController extends Controller
         $this->comment = $comment;
         $this->user = $user;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,13 +36,13 @@ class QuestionController extends Controller
      */
     public function index(Request $request)
     {
-        $inputRequest = $request->all();
-        if ($inputRequest === [] or $inputRequest['tag_category_id'] === '0') {
+        $inputRequests = $request->all();
+        if ($inputRequests === [] or $inputRequests['tag_category_id'] === '0') {
             $questions = $this->question->getAllQuestion(Auth::id());
-        } elseif (isset($inputRequest['search_word'])) {
-            $questions = $this->question->getQuestionByInputWord($inputRequest['search_word']);
+        } elseif (isset($inputRequests['search_word'])) {
+            $questions = $this->question->getQuestionByInputWord($inputRequests['search_word']);
         } else {
-            $questions = $this->question->getQuestionByCategory($inputRequest['tag_category_id']);
+            $questions = $this->question->getQuestionByCategory($inputRequests['tag_category_id']);
         }
         $tagCategorys = $this->tagCategory->all();
         return view('user.question.index', compact('questions', 'tagCategorys'));
@@ -66,9 +67,9 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $inputRequest = $request->all();
-        $inputRequest['user_id'] = Auth::id();
-        $this->question->fill($inputRequest)->save();
+        $inputRequests = $request->all();
+        $inputRequests['user_id'] = Auth::id();
+        $this->question->fill($inputRequests)->save();
         return redirect()->route('question.index');
     }
 
@@ -107,8 +108,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $inputRequest = $request->all();
-        $this->question->find($id)->fill($inputRequest)->save();
+        $inputRequests = $request->all();
+        $this->question->find($id)->fill($inputRequests)->save();
         return redirect()->route('question.index');
     }
 
@@ -127,17 +128,17 @@ class QuestionController extends Controller
 
     public function confirm(Request $request)
     {
-        $inputRequest = $request->all();
-        $requestTagCategory = $this->tagCategory->find($inputRequest['tag_category_id']);
-        return view('user.question.confirm', compact('inputRequest', 'requestTagCategory'));
+        $inputRequests = $request->all();
+        $requestTagCategory = $this->tagCategory->find($inputRequests['tag_category_id']);
+        return view('user.question.confirm', compact('inputRequests', 'requestTagCategory'));
     }
 
     public function comment(Request $request)
     {
-        $inputRequest = $request->all();
-        $inputRequest['user_id'] = Auth::id();
-        $this->comment->fill($inputRequest)->save();
-        return redirect()->route('question.show', $inputRequest['question_id']);
+        $inputRequests = $request->all();
+        $inputRequests['user_id'] = Auth::id();
+        $this->comment->fill($inputRequests)->save();
+        return redirect()->route('question.show', $inputRequests['question_id']);
     }
 
     public function myPage()
