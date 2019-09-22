@@ -39,7 +39,7 @@ class QuestionController extends Controller
         if ($inputRequest === [] or $inputRequest['tag_category_id'] === '0') {
             $questions = $this->question->getAllQuestion(Auth::id());
         } elseif (isset($inputRequest['search_word'])) {
-            $questions = $this->question->getQuestionByMonth($inputRequest['search_word']);
+            $questions = $this->question->getQuestionByInputWord($inputRequest['search_word']);
         } else {
             $questions = $this->question->getQuestionByCategory($inputRequest['tag_category_id']);
         }
