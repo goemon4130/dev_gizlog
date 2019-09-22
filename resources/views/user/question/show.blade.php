@@ -18,7 +18,7 @@
           </tr>
           <tr>
             <th class="table-column">Question</th>
-            <td class='td-text'>{{ $showQuestion->content }}</td>
+            <td class='td-text'>{!! nl2br(e($showQuestion->content)) !!}</td>
           </tr>
         </tbody>
       </table>
@@ -32,7 +32,7 @@
             <p>{{ $questionComment->user->name }}</p>
             <p class="comment-date">{{ $questionComment->created_at->format('Y-m-d H-i') }}</p>
           </div>
-          <div class="comment-body">{{ $questionComment->comment }}</div>
+          <div class="comment-body">{!! nl2br(e($questionComment->comment)) !!}</div>
         </div>
       @endforeach
     </div>
