@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-    @if (parse_url(url()->previous())['path'] === '/question/create' or parse_url(url()->previous())['path'] === '/question/request/confirm')
+    @if (parse_url(url()->previous())['path'] === '/question/create')
       {!! Form::open(['route' => 'question.store']) !!}
     @else
       {!! Form::open(['route' => ['question.update', $inputRequests['id']], 'method' => 'PUT']) !!}
