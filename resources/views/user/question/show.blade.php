@@ -37,22 +37,6 @@
       @endforeach
     </div>
   <div class="comment-box">
-    <!--<form>
-      <input name="user_id" type="hidden" value="">
-      <input name="question_id" type="hidden" value="">
-      <div class="comment-title">
-        <img src="" class="avatar-img"><p>コメントを投稿する</p>
-      </div>
-      <div class="comment-body">
-        <textarea class="form-control" placeholder="Add your comment..." name="comment" cols="50" rows="10"></textarea>
-        <span class="help-block"></span>
-      </div>
-      <div class="comment-bottom">
-        <button type="submit" class="btn btn-success">
-          <i class="fa fa-pencil" aria-hidden="true"></i>
-        </button>
-      </div>
-  </form>-->
     {!! Form::open(['route' => 'question.comment']) !!}
       {!! Form::input('hidden', 'question_id', $showQuestion->id) !!}
       <div class="comment-title">

@@ -36,10 +36,10 @@ class QuestionsRequest extends FormRequest
             ];
         }
 
-        if (empty($inputWord['id'])) {
-            $this->redirectRoute = 'question.create';
-        } elseif (array_key_exists('id', $inputWord)) {
+        if (isset($inputWord['id'])) {
             $this->redirect = 'question/'. $inputWord['id']. '/edit';
+        } elseif (empty($inputWord['id']) and array_key_exists('title', $inputWord) and array_key_exists('content', $inputWord)) {
+            $this->redirectRoute = 'question.create';
         }
         return [
             'tag_category_id' => ['sometimes', 'required', 'integer'],

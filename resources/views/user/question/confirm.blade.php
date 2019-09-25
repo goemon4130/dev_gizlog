@@ -23,13 +23,6 @@
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-    <!--<form>
-      <input name="user_id" type="hidden" value="">
-      <input name="tag_category_id" type="hidden" value="">
-      <input name="title" type="hidden" value="">
-      <input name="content" type="hidden" value="">
-      <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
-  </form>-->
     @if (parse_url(url()->previous())['path'] === '/question/create' or parse_url(url()->previous())['path'] === '/question/request/confirm')
       {!! Form::open(['route' => 'question.store']) !!}
     @else
