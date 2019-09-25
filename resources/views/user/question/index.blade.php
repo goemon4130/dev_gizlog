@@ -16,6 +16,9 @@
       <a class="btn" href="{{ route('question.mypage') }}">
         <i class="fa fa-user" aria-hidden="true"></i>
       </a>
+      <div class="{{ $errors->has('tag_category_id') ? ' has-error' : '' }}">
+        <span class="help-block">{{ $errors->first('tag_category_id') }}</span>
+      </div>
     </div>
     <div class="category-wrap">
       <div class="btn all" id="0">all</div>

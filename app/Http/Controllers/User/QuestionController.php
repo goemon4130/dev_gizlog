@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\TagCategory;
 use App\Models\Comment;
 use App\Models\User;
+use App\Http\Requests\User\QuestionsRequest;
 use Auth;
 
 class QuestionController extends Controller
@@ -34,7 +35,7 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(QuestionsRequest $request)
     {
         $inputRequests = $request->all();
         if ($inputRequests === [] or $inputRequests['tag_category_id'] === '0') {
@@ -65,7 +66,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionsRequest $request)
     {
         $inputRequests = $request->all();
         $inputRequests['user_id'] = Auth::id();
@@ -106,7 +107,7 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(QuestionsRequest $request, $id)
     {
         $inputRequests = $request->all();
         $this->question->find($id)->fill($inputRequests)->save();
@@ -126,14 +127,14 @@ class QuestionController extends Controller
         return redirect()->route('question.mypage');
     }
 
-    public function confirm(Request $request)
+    public function confirm(QuestionsRequest $request)
     {
         $inputRequests = $request->all();
         $requestTagCategory = $this->tagCategory->find($inputRequests['tag_category_id']);
         return view('user.question.confirm', compact('inputRequests', 'requestTagCategory'));
     }
 
-    public function comment(Request $request)
+    public function comment(QuestionsRequest $request)
     {
         $inputRequests = $request->all();
         $inputRequests['user_id'] = Auth::id();
