@@ -41,7 +41,7 @@ class QuestionController extends Controller
         if(empty($inputRequests)) {
             $questions = $this->question->getAllQuestion(Auth::id());
         } else {
-            $questions = $this->question->getFilteringQuestion($inputRequests);
+            $questions = $this->question->getFilteringQuestion($inputRequests, Auth::id());
         }
         $tagCategories = $this->tagCategory->all();
         return view('user.question.index', compact('questions', 'tagCategories', 'inputRequests'));
