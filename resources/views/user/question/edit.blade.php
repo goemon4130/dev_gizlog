@@ -9,7 +9,7 @@
       <div class="form-group{{ $errors->has('tag_category_id') ? ' has-error' : '' }}">
         <select name='tag_category_id' class = "form-control selectpicker form-size-small" id ="pref_id">
           <option value="{{ $editQuestion->tagCategory->id }}">{{ $editQuestion->tagCategory->name }}</option>
-          @foreach($tagCategorys as $tagCategory)
+          @foreach($tagCategories as $tagCategory)
             <option value= "{{ $tagCategory->id }}">{{ $tagCategory->name }}</option>
           @endforeach
         </select>

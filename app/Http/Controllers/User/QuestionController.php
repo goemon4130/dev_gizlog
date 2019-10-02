@@ -38,15 +38,13 @@ class QuestionController extends Controller
     public function index(QuestionsRequest $request)
     {
         $inputRequests = $request->all();
-        if ($inputRequests === [] or $inputRequests['tag_category_id'] === '0') {
+        if(empty($inputRequests)) {
             $questions = $this->question->getAllQuestion(Auth::id());
-        } elseif (isset($inputRequests['search_word'])) {
-            $questions = $this->question->getQuestionByInputWord($inputRequests['search_word']);
         } else {
-            $questions = $this->question->getQuestionByCategory($inputRequests['tag_category_id']);
+            $questions = $this->question->getFilteringQuestion($inputRequests);
         }
-        $tagCategorys = $this->tagCategory->all();
-        return view('user.question.index', compact('questions', 'tagCategorys'));
+        $tagCategories = $this->tagCategory->all();
+        return view('user.question.index', compact('questions', 'tagCategories', 'inputRequests'));
     }
 
     /**
@@ -56,8 +54,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $tagCategorys = $this->tagCategory->all();
-        return view('user.question.create', compact('tagCategorys'));
+        $tagCategories = $this->tagCategory->all();
+        return view('user.question.create', compact('tagCategories'));
     }
 
     /**
@@ -96,8 +94,8 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $editQuestion = $this->question->find($id);
-        $tagCategorys = $this->tagCategory->all();
-        return view('user.question.edit', compact('editQuestion', 'tagCategorys'));
+        $tagCategories = $this->tagCategory->all();
+        return view('user.question.edit', compact('editQuestion', 'tagCategories'));
     }
 
     /**

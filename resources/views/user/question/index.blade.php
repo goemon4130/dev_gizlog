@@ -6,23 +6,23 @@
   {!! Form::open(['route' => 'question.index', 'method' => 'GET']) !!}
     <div class="btn-wrapper">
       <div class="search-box">
-        {!! Form::input('text', 'search_word', null, ['class' => 'form-control search-form', 'placeholder' => 'Search words']) !!}
+        {!! Form::input('text', 'search_word', isset($inputRequests['search_word']) ? $inputRequests['search_word'] : null, ['class' => 'form-control search-form', 'placeholder' => 'Search words']) !!}
         {!! Form::button('<i class="fa fa-search" aria-hidden="true"></i>', ['class' => 'search-icon', 'type' => 'submit']) !!}
       </div>
       <a class="btn" href="{{ route('question.create') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
       <a class="btn" href="{{ route('question.mypage') }}">
         <i class="fa fa-user" aria-hidden="true"></i>
       </a>
-      <div class="{{ $errors->has('tag_category_id') ? ' has-error' : '' }}">
-        <span class="help-block">{{ $errors->first('tag_category_id') }}</span>
+      <div class="{{ $errors->has('select_tag_category_id') ? ' has-error' : '' }}">
+        <span class="help-block">{{ $errors->first('select_tag_category_id') }}</span>
       </div>
     </div>
     <div class="category-wrap">
       <div class="btn all" id="0">all</div>
-      @foreach ($tagCategorys as $tagCategory)
+      @foreach ($tagCategories as $tagCategory)
         <div class="btn {{ $tagCategory->name }}" id="{{ $tagCategory->id}}">{{ $tagCategory->name}}</div>
       @endforeach
-      {!! Form::input('hidden', 'tag_category_id', null, ['id' => 'category-val']) !!}
+      {!! Form::input('hidden', 'select_tag_category_id', 0, ['id' => 'category-val']) !!}
     </div>
   {!! Form::close() !!}
   <div class="content-wrapper table-responsive">

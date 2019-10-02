@@ -27,7 +27,7 @@ class QuestionsRequest extends FormRequest
      */
     public function rules()
     {
-        $inputWord = $this->all();
+        /*$inputWord = $this->all();
         if (isset($inputWord['search_word'])) {
             return [];
         } elseif (array_key_exists('tag_category_id', $inputWord) and array_key_exists('search_word', $inputWord)) {
@@ -46,12 +46,20 @@ class QuestionsRequest extends FormRequest
             'title' => ['sometimes', 'required', 'max:255'],
             'content' => ['sometimes', 'required', 'max:2000'],
             'comment' => ['sometimes', 'required', 'max:2000'],
+        ];*/
+        return [
+            'select_tag_category_id' => ['sometimes', 'integer', 'nullable'],
+            'tag_category_id' => ['sometimes', 'required', 'integer'],
+            'title' => ['sometimes', 'required', 'max:255'],
+            'content' => ['sometimes', 'required', 'max:2000'],
+            'comment' => ['sometimes', 'required', 'max:2000'],
         ];
     }
 
     public function messages()
     {
         return [
+            'select_tag_category_id.integer' => 'カテゴリーを選んでください',
             'tag_category_id.integer' => 'カテゴリーを選んでください',
             'tag_category_id.required' => '入力必須です。',
             'title.required' => '入力必須です。',

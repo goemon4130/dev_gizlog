@@ -45,4 +45,19 @@ class Question extends Model
     {
         return $this->where('user_id', $id)->latest()->get();
     }
+
+    public function getFilteringQuestion($inputRequests)
+    {
+        if($inputRequests['select_tag_category_id'] === '0' or is_null($inputRequests['select_tag_category_id'])) {
+            $questions = $this->where('title', 'like', '%'. $inputRequests['search_word']. '%')
+                              ->latest()
+                              ->get();
+        } else {
+            $questions = $this->where('title', 'like', '%'. $inputRequests['search_word']. '%')
+                              ->where('tag_category_id', $inputRequests['select_tag_category_id'])
+                              ->latest()
+                              ->get();
+        }
+        return $questions;
+    }
 }
