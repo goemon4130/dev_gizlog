@@ -7,12 +7,7 @@
   <div class="container">
     {!! Form::open(['route' => 'question.confirm', 'method' => 'GET']) !!}
       <div class="form-group{{ $errors->has('tag_category_id') ? ' has-error' : '' }}">
-        <select name='tag_category_id' class = "form-control selectpicker form-size-small" id ="pref_id">
-          <option value="{{ $editQuestion->tagCategory->id }}">{{ $editQuestion->tagCategory->name }}</option>
-          @foreach($tagCategories as $tagCategory)
-            <option value= "{{ $tagCategory->id }}">{{ $tagCategory->name }}</option>
-          @endforeach
-        </select>
+        {!! Form::select('tag_category_id', $arrayTagCategory, null, ['class' => 'form-control selectpicker form-size-small', 'id' => 'pref_id'])!!}
         <span class="help-block">{{ $errors->first('tag_category_id') }}</span>
       </div>
       <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">

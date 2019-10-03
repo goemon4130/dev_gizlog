@@ -55,7 +55,11 @@ class QuestionController extends Controller
     public function create()
     {
         $tagCategories = $this->tagCategory->all();
-        return view('user.question.create', compact('tagCategories'));
+        $arrayTagCategory = [];
+        foreach ($tagCategories as $tagCategory) {
+            $arrayTagCategory += [$tagCategory->id => $tagCategory->name];
+        }
+        return view('user.question.create', compact('arrayTagCategory'));
     }
 
     /**
@@ -95,7 +99,11 @@ class QuestionController extends Controller
     {
         $editQuestion = $this->question->find($id);
         $tagCategories = $this->tagCategory->all();
-        return view('user.question.edit', compact('editQuestion', 'tagCategories'));
+        $arrayTagCategory = [];
+        foreach ($tagCategories as $tagCategory) {
+            $arrayTagCategory += [$tagCategory->id => $tagCategory->name];
+        }
+        return view('user.question.edit', compact('editQuestion', 'arrayTagCategory'));
     }
 
     /**
