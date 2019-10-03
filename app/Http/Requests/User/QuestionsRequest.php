@@ -43,15 +43,9 @@ class QuestionsRequest extends FormRequest
     public function messages()
     {
         return [
-            'select_tag_category_id.integer' => 'カテゴリーを選んでください',
-            'tag_category_id.integer' => 'カテゴリーを選んでください',
-            'tag_category_id.required' => '入力必須です。',
-            'title.required' => '入力必須です。',
-            'title.max' => ':max以下で入力してください。',
-            'content.required' => '入力必須です。',
-            'content.max' => ':max以下で入力してください。',
-            'comment.required' => '入力必須です。',
-            'comment.max' => ':max以下で入力してください。' ,
+            'integer' => 'カテゴリーを選んでください',
+            'required' => '入力必須です',
+            'max' => ':max以下で入力してください',
         ];
     }
 
