@@ -46,20 +46,23 @@ class Question extends Model
         return $this->where('user_id', $id)->latest()->get();
     }
 
+    public function getQuestion($inputRequests, $id)
+    {
+        if(empty($inputRequests)) {
+            return $this->getAllQuestion($id);
+        } else {
+            return $this->getFilteringQuestion($inputRequests, $id);
+        }
+    }
+
     public function getFilteringQuestion($inputRequests, $id)
     {
-        if($inputRequests['select_tag_category_id'] === '0' or is_null($inputRequests['select_tag_category_id'])) {
-            $questions = $this->where('user_id', $id)
-                              ->where('title', 'like', '%'. $inputRequests['search_word']. '%')
-                              ->latest()
-                              ->get();
-        } else {
-            $questions = $this->where('user_id', $id)
-                              ->where('title', 'like', '%'. $inputRequests['search_word']. '%')
-                              ->where('tag_category_id', $inputRequests['select_tag_category_id'])
-                              ->latest()
-                              ->get();
-        }
-        return $questions;
+        return $this->where('user_id', $id)
+                    ->where('title', 'like', '%'. $inputRequests['search_word']. '%')
+                    ->when($inputRequests['select_tag_category_id'], function ($query, $selectTagCategoryId) {
+                        return $query->where('tag_category_id', $selectTagCategoryId);
+                    })
+                    ->latest()
+                    ->get();
     }
 }
