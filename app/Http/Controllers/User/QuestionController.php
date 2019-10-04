@@ -19,15 +19,12 @@ class QuestionController extends Controller
 
     protected $comment;
 
-    protected $user;
-
-    public function __construct(Question $question, TagCategory $tagCategory, Comment $comment, User $user)
+    public function __construct(Question $question, TagCategory $tagCategory, Comment $comment)
     {
         $this->middleware('auth');
         $this->question = $question;
         $this->tagCategory = $tagCategory;
         $this->comment = $comment;
-        $this->user = $user;
     }
 
     /**

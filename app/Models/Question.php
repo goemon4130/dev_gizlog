@@ -31,16 +31,6 @@ class Question extends Model
         return $this->where('user_id', $id)->latest()->get();
     }
 
-    public function getQuestionByInputWord($requestWord)
-    {
-        return $this->where('title', 'like', '%'. $requestWord. '%')->latest()->get();
-    }
-
-    public function getQuestionByCategory($tagCategoryId)
-    {
-        return $this->where('tag_category_id', $tagCategoryId)->latest()->get();
-    }
-
     public function getMyPostedQuestions($id)
     {
         return $this->where('user_id', $id)->latest()->get();
