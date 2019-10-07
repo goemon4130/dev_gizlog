@@ -26,6 +26,23 @@ class Question extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function scopeActiveUser($query, $id)
+    {
+        return $query->where('user_id', $id);
+    }
+
+    public function scopeSearchTitle($query, $searchWord)
+    {
+        return $query->where('title', 'like', '%'. $searchWord. '%');
+    }
+
+    public function scopeSearchTagCategory($query, $selectTagCategoryId)
+    {
+        if ($selectTagCategoryId) {
+            return $query->where('tag_category_id', $selectTagCategoryId);
+        }
+    }
+
     public function getUserAllQuestion($id)
     {
         return $this->where('user_id', $id)->latest()->get();
@@ -42,11 +59,9 @@ class Question extends Model
 
     public function getFilteringQuestion($inputRequests, $id)
     {
-        return $this->where('user_id', $id)
-                    ->where('title', 'like', '%'. $inputRequests['search_word']. '%')
-                    ->when($inputRequests['select_tag_category_id'], function ($query, $selectTagCategoryId) {
-                        return $query->where('tag_category_id', $selectTagCategoryId);
-                    })
+        return $this->activeUser($id)
+                    ->searchTitle($inputRequests['search_word'])
+                    ->searchTagCategory($inputRequests['select_tag_category_id'])
                     ->latest()
                     ->get();
     }
