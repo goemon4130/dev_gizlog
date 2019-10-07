@@ -26,12 +26,7 @@ class Question extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function getAllQuestion($id)
-    {
-        return $this->where('user_id', $id)->latest()->get();
-    }
-
-    public function getMyPostedQuestions($id)
+    public function getUserAllQuestion($id)
     {
         return $this->where('user_id', $id)->latest()->get();
     }
@@ -39,7 +34,7 @@ class Question extends Model
     public function getQuestion($inputRequests, $id)
     {
         if(empty($inputRequests)) {
-            return $this->getAllQuestion($id);
+            return $this->getUserAllQuestion($id);
         } else {
             return $this->getFilteringQuestion($inputRequests, $id);
         }
