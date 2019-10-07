@@ -28,7 +28,7 @@ class QuestionsRequest extends FormRequest
         $inputWord = $this->all();
         if (isset($inputWord['id'])) {
             $this->redirectRoute = 'question.edit';
-        } elseif (empty($inputWord['id']) and array_key_exists('title', $inputWord) and array_key_exists('content', $inputWord)) {
+        } elseif (array_key_exists('title', $inputWord) and array_key_exists('content', $inputWord)) {
             $this->redirectRoute = 'question.create';
         }
         return [
