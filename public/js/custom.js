@@ -4,7 +4,7 @@ $(function(){
   $('.category-wrap .btn').on('click', function(){
     var category_id = $(this).attr('id');
     $('#category-val').val(category_id);
-    $('form').submit();
+    $('.form').submit();
   });
 
   // Admin個別勤怠作成
@@ -93,12 +93,12 @@ $(function(){
       digits.s2.attr('class', digit_to_name[now[5]]);
 
       // The library returns Sunday as the first day of the week.
-      // Stupid, I know. Lets shift all the days one position down, 
+      // Stupid, I know. Lets shift all the days one position down,
       // and make Sunday last
 
       var dow = now[6];
       dow--;
-      
+
       // Sunday!
       if(dow < 0){
           // Make it last
@@ -119,4 +119,3 @@ $(function(){
 
 
 });
-

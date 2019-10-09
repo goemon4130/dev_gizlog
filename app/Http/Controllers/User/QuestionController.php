@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Models\TagCategory;
 use App\Models\Comment;
-use App\Models\User;
 use App\Http\Requests\User\QuestionsRequest;
 use Auth;
 

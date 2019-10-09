@@ -3,7 +3,7 @@
 
 <h2 class="brand-header">質問一覧</h2>
 <div class="main-wrap">
-  {!! Form::open(['route' => 'question.index', 'method' => 'GET']) !!}
+  {!! Form::open(['route' => 'question.index', 'method' => 'GET', 'class' => 'form']) !!}
     <div class="btn-wrapper">
       <div class="search-box">
         {!! Form::input('text', 'search_word', isset($inputRequests['search_word']) ? $inputRequests['search_word'] : null, ['class' => 'form-control search-form', 'placeholder' => 'Search words']) !!}
