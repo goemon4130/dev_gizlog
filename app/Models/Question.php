@@ -31,37 +31,25 @@ class Question extends Model
         return $query->where('user_id', $id);
     }
 
-    public function scopeSearchTitle($query, $searchWord)
+    public function scopeSearchTitle($query, $inputRequests)
     {
-        return $query->where('title', 'like', '%'. $searchWord. '%');
-    }
-
-    public function scopeSearchTagCategory($query, $selectTagCategoryId)
-    {
-        if ($selectTagCategoryId) {
-            return $query->where('tag_category_id', $selectTagCategoryId);
+        if (isset($inputRequests['search_word'])) {
+            return $query->where('title', 'like', '%'. $inputRequests['search_word']. '%');
         }
     }
 
-    public function getUserAllQuestion($id)
+    public function scopeSearchTagCategory($query, $inputRequests)
     {
-        return $this->where('user_id', $id)->latest()->get();
+        if (isset($inputRequests['select_tag_category_id']) and $inputRequests['select_tag_category_id'] !== '0') {
+            return $query->where('tag_category_id', $inputRequests['select_tag_category_id']);
+        }
     }
 
     public function getQuestion($inputRequests, $id)
     {
-        if(empty($inputRequests)) {
-            return $this->getUserAllQuestion($id);
-        } else {
-            return $this->getFilteringQuestion($inputRequests, $id);
-        }
-    }
-
-    public function getFilteringQuestion($inputRequests, $id)
-    {
         return $this->activeUser($id)
-                    ->searchTitle($inputRequests['search_word'])
-                    ->searchTagCategory($inputRequests['select_tag_category_id'])
+                    ->searchTitle($inputRequests)
+                    ->searchTagCategory($inputRequests)
                     ->latest()
                     ->get();
     }
