@@ -141,7 +141,7 @@ class QuestionController extends Controller
 
     public function myPage()
     {
-        $myPostedQuestions = $this->question->getUserAllQuestion(Auth::id());
+        $myPostedQuestions = $this->question->getMyPostedQuestion(Auth::id());
         $myAccount = Auth::user();
         return view('user.question.mypage', compact('myPostedQuestions', 'myAccount'));
     }

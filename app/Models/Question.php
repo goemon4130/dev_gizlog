@@ -53,4 +53,9 @@ class Question extends Model
                     ->latest()
                     ->get();
     }
+
+    public function getMyPostedQuestion($id)
+    {
+        return $this->activeUser($id)->latest()->get();
+    }
 }
