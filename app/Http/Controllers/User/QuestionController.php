@@ -92,10 +92,10 @@ class QuestionController extends Controller
     {
         $editQuestion = $this->question->find($id);
         $tagCategories = $this->tagCategory->all();
-        $arrayTagCategory = [];
-        foreach ($tagCategories as $tagCategory) {
-            $arrayTagCategory += [$tagCategory->id => $tagCategory->name];
-        }
+        $tagCategoryCollection = $tagCategories->mapWithKeys(function($item) {
+            return [$item['id'] => $item['name']];
+        });
+        $arrayTagCategory = $tagCategoryCollection->all();
         return view('user.question.edit', compact('editQuestion', 'arrayTagCategory'));
     }
 
