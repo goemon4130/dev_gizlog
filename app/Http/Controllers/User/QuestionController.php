@@ -7,6 +7,8 @@ use App\Models\Question;
 use App\Models\TagCategory;
 use App\Models\Comment;
 use App\Http\Requests\User\QuestionsRequest;
+use App\Http\Requests\User\CommentsRequest;
+
 use Auth;
 
 class QuestionController extends Controller
@@ -131,7 +133,7 @@ class QuestionController extends Controller
         return view('user.question.confirm', compact('inputRequests', 'requestTagCategory'));
     }
 
-    public function comment(QuestionsRequest $request)
+    public function comment(CommentsRequest $request)
     {
         $inputRequests = $request->all();
         $inputRequests['user_id'] = Auth::id();
