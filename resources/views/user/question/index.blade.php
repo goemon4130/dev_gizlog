@@ -16,6 +16,9 @@
       <div class="{{ $errors->has('select_tag_category_id') ? ' has-error' : '' }}">
         <span class="help-block">{{ $errors->first('select_tag_category_id') }}</span>
       </div>
+      <div class="{{ session('system_error') ? ' has-error' : '' }}">
+        <span class="help-block">{{ session('system_error') }}</span>
+      </div>
     </div>
     <div class="category-wrap">
       <div class="btn all" id="0">all</div>

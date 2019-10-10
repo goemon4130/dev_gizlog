@@ -3,6 +3,8 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class QuestionsRequest extends FormRequest
 {
@@ -23,11 +25,6 @@ class QuestionsRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->filled('id')) {
-            $this->redirect = 'question/'. $this->input('id'). '/edit';
-        } else {
-            $this->redirect = 'question/create';
-        }
         return [
             'select_tag_category_id' => ['sometimes', 'integer', 'nullable'],
             'tag_category_id' => ['sometimes', 'required', 'integer'],
@@ -43,5 +40,19 @@ class QuestionsRequest extends FormRequest
             'required' => '入力必須です',
             'max' => ':max以下で入力してください',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        if ($this->path() === 'question/request/confirm') {
+            throw (new ValidationException($validator))
+                    ->errorBag($this->errorBag)
+                    ->redirectTo($this->getRedirectUrl());
+        }
+        $this->redirectRoute = 'question.index';
+        session()->flash('system_error', '不正な操作です。');
+        throw (new ValidationException($validator))
+                    ->errorBag($this->errorBag)
+                    ->redirectTo($this->getRedirectUrl());
     }
 }
