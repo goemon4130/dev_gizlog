@@ -46,10 +46,10 @@ class QuestionController extends Controller
     public function create()
     {
         $tagCategories = $this->tagCategory->all();
-        $arrayTagCategory = [];
-        foreach ($tagCategories as $tagCategory) {
-            $arrayTagCategory += [$tagCategory->id => $tagCategory->name];
-        }
+        $tagCategoryCollection = $tagCategories->mapWithKeys(function($item) {
+            return [$item['id'] => $item['name']];
+        });
+        $arrayTagCategory = $tagCategoryCollection->all();
         return view('user.question.create', compact('arrayTagCategory'));
     }
 
