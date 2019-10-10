@@ -27,13 +27,11 @@
       {!! Form::open(['route' => 'question.store']) !!}
     @else
       {!! Form::open(['route' => ['question.update', $inputRequests['id']], 'method' => 'PUT']) !!}
+      {!! Form::input('hidden', 'id', $inputRequests['id']) !!}
     @endif
     {!! Form::input('hidden', 'tag_category_id', $inputRequests['tag_category_id']) !!}
     {!! Form::input('hidden', 'title', $inputRequests['title']) !!}
     {!! Form::input('hidden', 'content', $inputRequests['content']) !!}
-    @if (array_key_exists('id', $inputRequests))
-      {!! Form::input('hidden', 'id', $inputRequests['id']) !!}
-    @endif
     {!! Form::button('<i class="fa fa-check" aria-hidden="true"></i>', ['class' => 'btn btn-success', 'type' => 'submit']) !!}
   {!! Form::close() !!}
   </div>

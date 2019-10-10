@@ -44,7 +44,7 @@ class QuestionsRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        if ($this->path() === 'question/request/confirm') {
+        if ($this->path() === 'question/confirm') {
             throw (new ValidationException($validator))
                     ->errorBag($this->errorBag)
                     ->redirectTo($this->getRedirectUrl());
