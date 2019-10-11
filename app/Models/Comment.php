@@ -18,6 +18,6 @@ class Comment extends Model
 
     public function getQuestionComments($id)
     {
-        return $this->where('question_id', $id)->get();
+        return $this->where('question_id', $id)->with('user')->get();
     }
 }

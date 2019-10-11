@@ -47,15 +47,11 @@ class Question extends Model
 
     public function getQuestion($inputRequests, $id)
     {
-        return $this->activeUser($id)
-                    ->searchTitle($inputRequests)
-                    ->searchTagCategory($inputRequests)
-                    ->latest()
-                    ->get();
+        return $this->activeUser($id)->searchTitle($inputRequests)->searchTagCategory($inputRequests)->with(['user', 'tagCategory', 'comments'])->latest()->get();
     }
 
     public function getMyPostedQuestion($id)
     {
-        return $this->activeUser($id)->latest()->get();
+        return $this->activeUser($id)->with(['tagCategory', 'comments'])->latest()->get();
     }
 }
