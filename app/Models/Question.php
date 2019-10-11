@@ -45,13 +45,8 @@ class Question extends Model
         }
     }
 
-    public function getQuestion($inputs, $id)
+    public function getQuestion($id, $inputs = null)
     {
         return $this->activeUser($id)->searchTitle($inputs)->searchTagCategory($inputs)->with(['user', 'tagCategory', 'comments'])->latest()->get();
-    }
-
-    public function getMyPostedQuestion($id)
-    {
-        return $this->activeUser($id)->with(['tagCategory', 'comments'])->latest()->get();
     }
 }
