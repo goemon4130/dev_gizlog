@@ -36,7 +36,7 @@ class QuestionsRequest extends FormRequest
     public function messages()
     {
         return [
-            'integer' => 'カテゴリーを選んでください',
+            'integer' => '数字にしてください',
             'required' => '入力必須です',
             'max' => ':max以下で入力してください',
         ];
@@ -44,13 +44,13 @@ class QuestionsRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        if ($this->path() === 'question/confirm') {
+        if (parse_url(url()->previous())['path'] === '/'. 'question/confirm') {
+            $this->redirectRoute = 'question.index';
+            session()->flash('system_error', '不正な操作です。');
             throw (new ValidationException($validator))
-                    ->errorBag($this->errorBag)
-                    ->redirectTo($this->getRedirectUrl());
+                        ->errorBag($this->errorBag)
+                        ->redirectTo($this->getRedirectUrl());
         }
-        $this->redirectRoute = 'question.index';
-        session()->flash('system_error', '不正な操作です。');
         throw (new ValidationException($validator))
                     ->errorBag($this->errorBag)
                     ->redirectTo($this->getRedirectUrl());
