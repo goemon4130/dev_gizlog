@@ -47,11 +47,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $tagCategories = $this->tagCategory->all();
-        $tagCategoryCollection = $tagCategories->mapWithKeys(function($item) {
-            return [$item['id'] => $item['name']];
-        });
-        $arrayTagCategory = $tagCategoryCollection->all();
+        $arrayTagCategory = $this->getArrayTagCategory();
         return view('user.question.create', compact('arrayTagCategory'));
     }
 
@@ -91,11 +87,7 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $editQuestion = $this->question->find($id);
-        $tagCategories = $this->tagCategory->all();
-        $tagCategoryCollection = $tagCategories->mapWithKeys(function($item) {
-            return [$item['id'] => $item['name']];
-        });
-        $arrayTagCategory = $tagCategoryCollection->all();
+        $arrayTagCategory = $this->getArrayTagCategory();
         return view('user.question.edit', compact('editQuestion', 'arrayTagCategory'));
     }
 
@@ -146,5 +138,15 @@ class QuestionController extends Controller
         $myPostedQuestions = $this->question->getQuestion(Auth::id());
         $myAccount = Auth::user();
         return view('user.question.mypage', compact('myPostedQuestions', 'myAccount'));
+    }
+
+    private function getArrayTagCategory()
+    {
+        $tagCategories = $this->tagCategory->all();
+        $tagCategoryCollection = $tagCategories->mapWithKeys(function($item) {
+            return [$item['id'] => $item['name']];
+        });
+        $arrayTagCategory = $tagCategoryCollection->all();
+        return $arrayTagCategory;
     }
 }
