@@ -74,7 +74,7 @@ class QuestionController extends Controller
     public function show($id)
     {
         $showQuestion = $this->question->find($id);
-        $questionComments = $this->comment->getQuestionComments($id);
+        $questionComments = $showQuestion->comments()->with('user')->get();
         return view('user.question.show', compact('showQuestion', 'questionComments'));
     }
 
