@@ -44,12 +44,9 @@ class QuestionsRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        if (parse_url(url()->previous())['path'] === '/'. 'question/confirm') {
+        if ($this->has(['tag_category_id', 'title', 'content'])) {
             $this->redirectRoute = 'question.index';
             session()->flash('system_error', '不正な操作です。');
-            throw (new ValidationException($validator))
-                        ->errorBag($this->errorBag)
-                        ->redirectTo($this->getRedirectUrl());
         }
         throw (new ValidationException($validator))
                     ->errorBag($this->errorBag)
