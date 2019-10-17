@@ -143,9 +143,7 @@ class QuestionController extends Controller
     private function getArrayTagCategory()
     {
         $tagCategories = $this->tagCategory->all();
-        $tagCategoryCollection = $tagCategories->mapWithKeys(function($item) {
-            return [$item['id'] => $item['name']];
-        });
+        $tagCategoryCollection = $tagCategories->pluck('name', 'id');
         $arrayTagCategory = $tagCategoryCollection->all();
         return $arrayTagCategory;
     }
