@@ -28,7 +28,9 @@ class Question extends Model
 
     public function scopeActiveUser($query, $id)
     {
-        return $query->where('user_id', $id);
+        if ($id !== 0) {
+            return $query->where('user_id', $id);
+        }
     }
 
     public function scopeSearchTitle($query, $inputs)
@@ -45,7 +47,7 @@ class Question extends Model
         }
     }
 
-    public function getQuestion($id, $inputs = null)
+    public function getQuestion($id, $inputs = [])
     {
         return $this->activeUser($id)->searchTitle($inputs)->searchTagCategory($inputs)->with(['user', 'tagCategory', 'comments'])->latest()->get();
     }

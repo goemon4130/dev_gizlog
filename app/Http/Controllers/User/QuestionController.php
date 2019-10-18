@@ -35,7 +35,7 @@ class QuestionController extends Controller
     public function index(QuestionsRequest $request)
     {
         $inputs = $request->all();
-        $questions = $this->question->getQuestion(Auth::id(), $inputs);
+        $questions = $this->question->getQuestion(0, $inputs);
         $tagCategories = $this->tagCategory->all();
         return view('user.question.index', compact('questions', 'tagCategories', 'inputs'));
     }
