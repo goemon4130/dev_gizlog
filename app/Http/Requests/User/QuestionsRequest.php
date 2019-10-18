@@ -44,7 +44,7 @@ class QuestionsRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        if ($this->has(['tag_category_id', 'title', 'content'])) {
+        if (($this->url() === route('question.store') and $this->isMethod('post')) or $this->url() === route('question.update', ['id' => $this->input('id')]) and $this->isMethod('put')) {
             $this->redirectRoute = 'question.index';
             session()->flash('system_error', '不正な操作です。');
         }
