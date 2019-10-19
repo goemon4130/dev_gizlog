@@ -13,42 +13,6 @@ class CommentsTableSeeder extends Seeder
     public function run()
     {
         DB::table('comments')->truncate();
-        DB::table('comments')->insert([
-            [
-                'user_id' => 4,
-                'question_id' => 1,
-                'comment' => 'seederテスト',
-                'created_at' => Carbon::create(2018, 1, 1),
-                'updated_at' => Carbon::create(2018, 9, 1),
-            ],
-            [
-                'user_id' => 4,
-                'question_id' => 2,
-                'comment' => '999999999999',
-                'created_at' => Carbon::create(2018, 4, 1),
-                'updated_at' => Carbon::create(2018, 10, 1),
-            ],
-            [
-                'user_id' => 1,
-                'question_id' => 2,
-                'comment' => 'テストテスト',
-                'created_at' => Carbon::create(2018, 4, 1),
-                'updated_at' => Carbon::create(2018, 10, 1),
-            ],
-            [
-                'user_id' => 2,
-                'question_id' => 2,
-                'comment' => '2323232323',
-                'created_at' => Carbon::create(2018, 4, 1),
-                'updated_at' => Carbon::create(2018, 10, 1),
-            ],
-            [
-                'user_id' => 2,
-                'question_id' => 3,
-                'comment' => '888888888888',
-                'created_at' => Carbon::create(2018, 4, 1),
-                'updated_at' => Carbon::create(2018, 10, 1),
-            ],
-        ]);
+        factory(App\Models\Comment::class, 3000)->create();
     }
 }
