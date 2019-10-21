@@ -8,16 +8,15 @@ use App\Models\TagCategory;
 use App\Models\Comment;
 use App\Http\Requests\User\QuestionsRequest;
 use App\Http\Requests\User\CommentsRequest;
-
 use Auth;
 
 class QuestionController extends Controller
 {
-    protected $question;
+    private $question;
 
-    protected $tagCategory;
+    private $tagCategory;
 
-    protected $comment;
+    private $comment;
 
     public function __construct(Question $question, TagCategory $tagCategory, Comment $comment)
     {
