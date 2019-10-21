@@ -26,7 +26,7 @@ class QuestionsRequest extends FormRequest
     public function rules()
     {
         return [
-            'select_tag_category_id' => ['sometimes', 'integer', 'nullable'],
+            'select_tag_category_id' => ['sometimes', 'integer', 'exists:tag_categories,id', 'nullable'],
             'tag_category_id' => ['sometimes', 'required', 'integer'],
             'title' => ['sometimes', 'required', 'max:255'],
             'content' => ['sometimes', 'required', 'max:2000'],
@@ -39,13 +39,14 @@ class QuestionsRequest extends FormRequest
             'integer' => '数字にしてください',
             'required' => '入力必須です',
             'max' => ':max以下で入力してください',
+            'exists' => 'その数字は存在しません',
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
-        if (($this->url() === route('question.store') and $this->isMethod('post')) or $this->url() === route('question.update', ['id' => $this->input('id')]) and $this->isMethod('put')) {
-            $this->redirectRoute = 'question.index';
+        if (($this->url() === route('QuestionController.store') and $this->isMethod('post')) or $this->url() === route('QuestionController.update', ['id' => $this->input('id')]) and $this->isMethod('put')) {
+            $this->redirectRoute = 'QuestionController.index';
             session()->flash('system_error', '不正な操作です。');
         }
         throw (new ValidationException($validator))

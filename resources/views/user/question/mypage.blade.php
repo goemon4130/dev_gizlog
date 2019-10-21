@@ -25,12 +25,12 @@
             <td class="col-xs-5">{{ str_limit($myPostedQuestion->title, $limit = 30, $end = '...') }}</td>
             <td class="col-xs-2"><span class="point-color">{{ $myPostedQuestion->comments->count() }}</span></td>
             <td class="col-xs-1">
-              <a class="btn btn-success" href="{{ route('question.edit', $myPostedQuestion->id) }}">
+              <a class="btn btn-success" href="{{ route('QuestionController.edit', $myPostedQuestion->id) }}">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
               </a>
             </td>
             <td class="col-xs-1">
-              {!! Form::open(['route' => ['question.destroy', $myPostedQuestion->id], 'method' => 'DELETE']) !!}
+              {!! Form::open(['route' => ['QuestionController.destroy', $myPostedQuestion->id], 'method' => 'DELETE']) !!}
                 {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', ['class' => 'btn btn-danger', 'type' => 'submit']) !!}
               {!! Form::close() !!}
             </td>

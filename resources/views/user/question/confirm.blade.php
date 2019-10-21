@@ -23,10 +23,10 @@
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-    @if (parse_url(url()->previous())['path'] === '/question/create')
-      {!! Form::open(['route' => 'question.store']) !!}
+    @if (parse_url(url()->previous())['path'] === '/QuestionController/create')
+      {!! Form::open(['route' => 'QuestionController.store']) !!}
     @else
-      {!! Form::open(['route' => ['question.update', $inputs['id']], 'method' => 'PUT']) !!}
+      {!! Form::open(['route' => ['QuestionController.update', $inputs['id']], 'method' => 'PUT']) !!}
       {!! Form::input('hidden', 'id', $inputs['id']) !!}
     @endif
     {!! Form::input('hidden', 'tag_category_id', $inputs['tag_category_id']) !!}

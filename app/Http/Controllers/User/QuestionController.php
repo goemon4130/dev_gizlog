@@ -62,7 +62,7 @@ class QuestionController extends Controller
         $inputs = $request->all();
         $inputs['user_id'] = Auth::id();
         $this->question->fill($inputs)->save();
-        return redirect()->route('question.index');
+        return redirect()->route('QuestionController.index');
     }
 
     /**
@@ -102,7 +102,7 @@ class QuestionController extends Controller
     {
         $inputs = $request->all();
         $this->question->find($id)->fill($inputs)->save();
-        return redirect()->route('question.index');
+        return redirect()->route('QuestionController.index');
     }
 
     /**
@@ -115,7 +115,7 @@ class QuestionController extends Controller
     {
         $this->question->find($id)->delete();
         $this->comment->where('question_id', $id)->delete();
-        return redirect()->route('question.mypage');
+        return redirect()->route('QuestionController.mypage');
     }
 
     public function confirm(QuestionsRequest $request)
@@ -130,7 +130,7 @@ class QuestionController extends Controller
         $inputs = $request->all();
         $inputs['user_id'] = Auth::id();
         $this->comment->fill($inputs)->save();
-        return redirect()->route('question.show', $inputs['question_id']);
+        return redirect()->route('QuestionController.show', $inputs['question_id']);
     }
 
     public function myPage()

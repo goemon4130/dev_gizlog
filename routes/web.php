@@ -42,10 +42,10 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
 
     Route::resource('report', DailyReportController::class);
 
-    Route::resource('question', QuestionController::class);
-    Route::post('question/confirm', 'QuestionController@confirm')->name('question.confirm');
-    Route::post('question/comment', 'QuestionController@comment')->name('question.comment');
-    Route::get('question/account/mypage', 'QuestionController@myPage')->name('question.mypage');
+    Route::resource('QuestionController', QuestionController::class);
+    Route::post('QuestionController/confirm', 'QuestionController@confirm')->name('QuestionController.confirm');
+    Route::post('QuestionController/comment', 'QuestionController@comment')->name('QuestionController.comment');
+    Route::get('QuestionController/mypage/question', 'QuestionController@myPage')->name('QuestionController.mypage');
 
 });
 

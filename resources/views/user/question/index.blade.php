@@ -3,14 +3,14 @@
 
 <h2 class="brand-header">質問一覧</h2>
 <div class="main-wrap">
-  {!! Form::open(['route' => 'question.index', 'method' => 'GET', 'class' => 'form']) !!}
+  {!! Form::open(['route' => 'QuestionController.index', 'method' => 'GET', 'class' => 'form']) !!}
     <div class="btn-wrapper">
       <div class="search-box">
         {!! Form::input('text', 'search_word', isset($inputs['search_word']) ? $inputs['search_word'] : null, ['class' => 'form-control search-form', 'placeholder' => 'Search words']) !!}
         {!! Form::button('<i class="fa fa-search" aria-hidden="true"></i>', ['class' => 'search-icon', 'type' => 'submit']) !!}
       </div>
-      <a class="btn" href="{{ route('question.create') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
-      <a class="btn" href="{{ route('question.mypage') }}">
+      <a class="btn" href="{{ route('QuestionController.create') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+      <a class="btn" href="{{ route('QuestionController.mypage') }}">
         <i class="fa fa-user" aria-hidden="true"></i>
       </a>
       <div class="{{ $errors->has('select_tag_category_id') ? ' has-error' : '' }}">
@@ -47,7 +47,7 @@
           <td class="col-xs-6">{{ str_limit($question->title, $limit = 30, $end = '...') }}</td>
           <td class="col-xs-1"><span class="point-color">{{ $question->comments->count() }}</span></td>
           <td class="col-xs-2">
-            <a class="btn btn-success" href="{{ route('question.show', $question->id) }}">
+            <a class="btn btn-success" href="{{ route('QuestionController.show', $question->id) }}">
               <i class="fa fa-comments-o" aria-hidden="true"></i>
             </a>
           </td>
