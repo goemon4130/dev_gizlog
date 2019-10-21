@@ -25,7 +25,7 @@
       @foreach ($tagCategories as $tagCategory)
         <div class="btn {{ $tagCategory->name }}" id="{{ $tagCategory->id}}">{{ $tagCategory->name}}</div>
       @endforeach
-      {!! Form::input('hidden', 'select_tag_category_id', 0, ['id' => 'category-val']) !!}
+      {!! Form::input('hidden', 'select_tag_category_id', null, ['id' => 'category-val']) !!}
     </div>
   {!! Form::close() !!}
   <div class="content-wrapper table-responsive">

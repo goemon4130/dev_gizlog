@@ -42,7 +42,7 @@ class Question extends Model
 
     public function scopeSearchTagCategory($query, $inputs)
     {
-        if (isset($inputs['select_tag_category_id']) and $inputs['select_tag_category_id'] !== '0') {
+        if (isset($inputs['select_tag_category_id'])) {
             return $query->where('tag_category_id', $inputs['select_tag_category_id']);
         }
     }
