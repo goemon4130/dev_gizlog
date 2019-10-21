@@ -45,7 +45,8 @@ class QuestionsRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        if (($this->url() === route('QuestionController.store') and $this->isMethod('post')) or $this->url() === route('QuestionController.update', ['id' => $this->input('id')]) and $this->isMethod('put')) {
+        if (($this->url() === route('QuestionController.store') and $this->isMethod('post')) ||    
+        ($this->url() === route('QuestionController.update', ['id' => $this->input('id')]) and $this->isMethod('put'))) {
             $this->redirectRoute = 'QuestionController.index';
             session()->flash('system_error', '不正な操作です。');
         }
