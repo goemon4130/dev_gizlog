@@ -133,9 +133,9 @@ class QuestionController extends Controller
 
     public function myPage()
     {
-        $myPostedQuestions = $this->question->getQuestion(Auth::id());
-        $myAccount = Auth::user();
-        return view('user.question.mypage', compact('myPostedQuestions', 'myAccount'));
+        $user = Auth::user();
+        $myPostedQuestions = $this->question->getQuestion($user->id);
+        return view('user.question.mypage', compact('myPostedQuestions', 'user'));
     }
 
     private function getArrayTagCategory()
