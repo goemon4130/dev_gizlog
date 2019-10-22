@@ -25,14 +25,14 @@
     </div>
   </div>
     <div class="comment-list">
-      @foreach ($questionComments as $questionComment)
+      @foreach ($showQuestion->comments as $comment)
         <div class="comment-wrap">
           <div class="comment-title">
-            <img src="{{ $questionComment->user->avatar }}" class="avatar-img">
-            <p>{{ $questionComment->user->name }}</p>
-            <p class="comment-date">{{ $questionComment->created_at->format('Y-m-d H-i') }}</p>
+            <img src="{{ $comment->user->avatar }}" class="avatar-img">
+            <p>{{ $comment->user->name }}</p>
+            <p class="comment-date">{{ $comment->created_at->format('Y-m-d H-i') }}</p>
           </div>
-          <div class="comment-body">{!! nl2br(e($questionComment->comment)) !!}</div>
+          <div class="comment-body">{!! nl2br(e($comment->comment)) !!}</div>
         </div>
       @endforeach
     </div>
