@@ -141,9 +141,6 @@ class QuestionController extends Controller
 
     private function getArrayTagCategory()
     {
-        $tagCategories = $this->tagCategory->all();
-        $tagCategoryCollection = $tagCategories->pluck('name', 'id');
-        $arrayTagCategory = $tagCategoryCollection->all();
-        return $arrayTagCategory;
+        return $this->tagCategory->all()->pluck('name', 'id')->all();
     }
 }
