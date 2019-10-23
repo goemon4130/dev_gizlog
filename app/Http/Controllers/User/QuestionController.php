@@ -27,8 +27,9 @@ class QuestionController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 質問一覧表示
      *
+     * @param  \App\Http\Requests\User\QuestionRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function index(QuestionsRequest $request)
@@ -40,7 +41,7 @@ class QuestionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 新規作成画面表示
      *
      * @return \Illuminate\Http\Response
      */
@@ -51,9 +52,9 @@ class QuestionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 新規作成処理
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\User\QuestionRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(QuestionsRequest $request)
@@ -65,7 +66,7 @@ class QuestionController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 質問詳細画面表示
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -77,7 +78,7 @@ class QuestionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 質問更新画面表示
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -90,9 +91,9 @@ class QuestionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 質問更新処理
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\User\QuestionRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -104,7 +105,7 @@ class QuestionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 質問と、それに紐づくコメント削除処理
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -116,6 +117,12 @@ class QuestionController extends Controller
         return redirect()->route('QuestionController.mypage');
     }
 
+    /**
+     * 新規作成、質問更新時の確認画面表示
+     * 
+     * @param  \App\Http\Requests\User\QuestionRequest  $request
+     * @return \Illuminate\Http\Response
+     */
     public function confirm(QuestionsRequest $request)
     {
         $inputs = $request->all();
@@ -123,6 +130,12 @@ class QuestionController extends Controller
         return view('user.question.confirm', compact('inputs', 'requestTagCategory'));
     }
 
+    /**
+     * コメント投稿処理
+     * 
+     * @param \App\Http\Requests\User\CommentsRequest  $request
+     * @return \Illuminate\Http\Response
+     */
     public function comment(CommentsRequest $request)
     {
         $inputs = $request->all();
@@ -131,6 +144,11 @@ class QuestionController extends Controller
         return redirect()->route('QuestionController.show', $inputs['question_id']);
     }
 
+    /**
+     * ログインユーザが投稿した質問一覧表示
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function myPage()
     {
         $user = Auth::user();
@@ -138,6 +156,11 @@ class QuestionController extends Controller
         return view('user.question.mypage', compact('myPostedQuestions', 'user'));
     }
 
+    /**
+     * タグカテゴリの配列生成処理
+     * 
+     * @return Array
+     */
     private function getArrayTagCategory()
     {
         return $this->tagCategory->all()->pluck('name', 'id')->all();
