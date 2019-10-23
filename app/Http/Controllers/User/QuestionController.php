@@ -30,7 +30,7 @@ class QuestionController extends Controller
      * 質問一覧表示
      *
      * @param  \App\Http\Requests\User\QuestionRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index(QuestionsRequest $request)
     {
@@ -43,7 +43,7 @@ class QuestionController extends Controller
     /**
      * 新規作成画面表示
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -55,7 +55,7 @@ class QuestionController extends Controller
      * 新規作成処理
      *
      * @param  \App\Http\Requests\User\QuestionRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(QuestionsRequest $request)
     {
@@ -69,7 +69,7 @@ class QuestionController extends Controller
      * 質問詳細画面表示
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
@@ -81,7 +81,7 @@ class QuestionController extends Controller
      * 質問更新画面表示
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -95,7 +95,7 @@ class QuestionController extends Controller
      *
      * @param  \App\Http\Requests\User\QuestionRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(QuestionsRequest $request, $id)
     {
@@ -108,7 +108,7 @@ class QuestionController extends Controller
      * 質問と、それに紐づくコメント削除処理
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -121,7 +121,7 @@ class QuestionController extends Controller
      * 新規作成、質問更新時の確認画面表示
      * 
      * @param  \App\Http\Requests\User\QuestionRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function confirm(QuestionsRequest $request)
     {
@@ -134,7 +134,7 @@ class QuestionController extends Controller
      * コメント投稿処理
      * 
      * @param \App\Http\Requests\User\CommentsRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function comment(CommentsRequest $request)
     {
@@ -147,7 +147,7 @@ class QuestionController extends Controller
     /**
      * ログインユーザが投稿した質問一覧表示
      * 
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function myPage()
     {
