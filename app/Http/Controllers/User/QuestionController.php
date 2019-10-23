@@ -35,7 +35,7 @@ class QuestionController extends Controller
     public function index(QuestionsRequest $request)
     {
         $inputs = $request->all();
-        $questions = $this->question->getQuestion(0, $inputs);
+        $questions = $this->question->getQuestion($inputs);
         $tagCategories = $this->tagCategory->all();
         return view('user.question.index', compact('questions', 'tagCategories', 'inputs'));
     }
@@ -152,7 +152,7 @@ class QuestionController extends Controller
     public function myPage()
     {
         $user = Auth::user();
-        $myPostedQuestions = $this->question->getQuestion($user->id);
+        $myPostedQuestions = $this->question->getQuestion(array('user_id' => $user->id));
         return view('user.question.mypage', compact('myPostedQuestions', 'user'));
     }
 

@@ -26,29 +26,29 @@ class Question extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function scopeActiveUser($query, $id)
+    public function scopeActiveUser($query, $request)
     {
-        if ($id !== 0) {
-            return $query->where('user_id', $id);
+        if (isset($request['user_id'])) {
+            return $query->where('user_id', $request['user_id']);
         }
     }
 
-    public function scopeSearchTitle($query, $inputs)
+    public function scopeSearchTitle($query, $request)
     {
-        if (isset($inputs['search_word'])) {
-            return $query->where('title', 'like', '%'. $inputs['search_word']. '%');
+        if (isset($request['search_word'])) {
+            return $query->where('title', 'like', '%'. $request['search_word']. '%');
         }
     }
 
-    public function scopeSearchTagCategory($query, $inputs)
+    public function scopeSearchTagCategory($query, $request)
     {
-        if (isset($inputs['select_tag_category_id'])) {
-            return $query->where('tag_category_id', $inputs['select_tag_category_id']);
+        if (isset($request['select_tag_category_id'])) {
+            return $query->where('tag_category_id', $request['select_tag_category_id']);
         }
     }
 
-    public function getQuestion($id, $inputs = [])
+    public function getQuestion($request)
     {
-        return $this->activeUser($id)->searchTitle($inputs)->searchTagCategory($inputs)->with(['user', 'tagCategory', 'comments'])->latest()->get();
+        return $this->activeUser($request)->searchTitle($request)->searchTagCategory($request)->with(['user', 'tagCategory', 'comments'])->latest()->get();
     }
 }
