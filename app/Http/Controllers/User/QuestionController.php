@@ -29,7 +29,7 @@ class QuestionController extends Controller
     /**
      * 質問一覧表示
      *
-     * @param \App\Http\Requests\User\QuestionRequest $request
+     * @param QuestionRequest $request
      * @return \Illuminate\View\View
      */
     public function index(QuestionsRequest $request)
@@ -54,7 +54,7 @@ class QuestionController extends Controller
     /**
      * 新規作成処理
      *
-     * @param \App\Http\Requests\User\QuestionRequest $request
+     * @param QuestionRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(QuestionsRequest $request)
@@ -93,7 +93,7 @@ class QuestionController extends Controller
     /**
      * 質問更新処理
      *
-     * @param \App\Http\Requests\User\QuestionRequest $request
+     * @param QuestionRequest $request
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -120,7 +120,7 @@ class QuestionController extends Controller
     /**
      * 新規作成、質問更新時の確認画面表示
      * 
-     * @param \App\Http\Requests\User\QuestionRequest $request
+     * @param QuestionRequest $request
      * @return \Illuminate\View\View
      */
     public function confirm(QuestionsRequest $request)
@@ -133,7 +133,7 @@ class QuestionController extends Controller
     /**
      * コメント投稿処理
      * 
-     * @param \App\Http\Requests\User\CommentsRequest $request
+     * @param CommentsRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function comment(CommentsRequest $request)

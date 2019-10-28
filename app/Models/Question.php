@@ -91,6 +91,7 @@ class Question extends Model
      */
     public function getQuestion($request)
     {
-        return $this->activeUser($request)->searchTitle($request)->searchTagCategory($request)->with(['user', 'tagCategory', 'comments'])->latest()->get();
+        return $this->activeUser($request)->searchTitle($request)->searchTagCategory($request)
+        ->with(['user', 'tagCategory', 'comments'])->latest()->get();
     }
 }
